@@ -1,0 +1,117 @@
+================================================================================
+ RESEARCH REPORT: HANDLING LARGE FILES (>100MB) IN GIT & GITHUB DEPLOYMENTS
+================================================================================
+Project: Agri Oracle Multi-Crop Price Prediction Platform
+Topic: How Large Files (173MB & 113MB) Were Managed & Resolved for GitHub Push
+Date: 2026-10-11
+
+--------------------------------------------------------------------------------
+1. THE PROBLEM: GITHUB'S STRICT 100MB LIMIT
+--------------------------------------------------------------------------------
+When running `git push origin main`, GitHub rejected the push with the error:
+  "remote: error: File datasets/rice/raw_kaggle/Paddy(Dhan)(Common).csv is 173.20 MB;
+   this exceeds GitHub's file size limit of 100.00 MB
+   remote: error: File datasets/rice/raw_kaggle/Rice.csv is 113.38 MB;
+   this exceeds GitHub's file size limit of 100.00 MB
+   remote: error: GH001: Large files detected."
+
+Root Cause:
+- GitHub allows repositories up to a few gigabytes in total size, but strictly
+  blocks ANY individual file that exceeds 100.00 MB in standard Git commits.
+- Once a file >100MB is included in ANY commit in your Git history, Git packages
+  it into the push objects. Even if you edit or delete the file in a future commit,
+  Git will still attempt to push that historical commit and fail.
+
+--------------------------------------------------------------------------------
+2. INVESTIGATION & AUDIT OF PROJECT FILES
+--------------------------------------------------------------------------------
+We ran an automated disk scan across the entire project directory:
+- Found:
+  1) `datasets/rice/raw_kaggle/Paddy(Dhan)(Common).csv` -> 173.20 MB
+  2) `datasets/rice/raw_kaggle/Rice.csv`               -> 113.38 MB
+  3) `agri_oracle.duckdb`                             -> 11.51 MB (Full DuckDB database)
+  4) All other feature datasets & ML models           -> < 5 MB each
+
+Key Discovery:
+- The two large CSV files were raw Kaggle download dumps.
+- They were NOT used during runtime by `server.py`, `app.js`, `db_manager.py`,
+  or `fetch_today_live_data.py`.
+- All useful records had ALREADY been ingested into the clean prediction sets
+  and the high-performance DuckDB database (`agri_oracle.duckdb`).
+- Keeping 300MB of raw dumps in Git would slow down git clone/pull, breach GitHub
+  limits, and waste server bandwidth on Railway.
+
+--------------------------------------------------------------------------------
+3. EXACT SOLUTION IMPLEMENTED (STEP-BY-STEP)
+--------------------------------------------------------------------------------
+To fix the rejection, we had to remove the large files from Git's staged commit
+history while preserving them safely on your local disk.
+
+Step 3.1: Undo the commit without deleting files
+  `git reset --soft HEAD~1`
+  - What this did: Moved the HEAD pointer back by one commit.
+  - Why `--soft`: Kept all your code modifications intact in your staging area,
+    so no code was lost.
+
+Step 3.2: Exclude raw dump directories in `.gitignore`
+  Added the following rule to `.gitignore`:
+    datasets/rice/raw_kaggle/
+    *.csv.zip
+
+Step 3.3: Untrack the large files from Git's index
+  `git rm -r --cached "datasets/rice/raw_kaggle"`
+  - What this did: Told Git to stop tracking these files.
+  - The files remained 100% safe on your local hard drive, but Git stopped
+    trying to package them for GitHub.
+
+Step 3.4: Re-stage and re-commit the clean repository
+  `git add .`
+  `git commit -m "Initial commit with DuckDB, server APIs, and deployment configs"`
+
+Step 3.5: Successful push
+  `git push origin main`
+  - GitHub accepted the push instantly with zero errors!
+
+--------------------------------------------------------------------------------
+4. ALTERNATIVE TECHNIQUES: HOW TO PUSH >100MB FILES IF TRULY REQUIRED
+--------------------------------------------------------------------------------
+If in the future you ever genuinely NEED to store a 100MB+ file on GitHub, here
+are the 3 industry-standard solutions:
+
+A) Git LFS (Large File Storage):
+   - GitHub's official extension for large binary files.
+   - How it works: Stores pointers in Git and uploads the actual file to GitHub's
+     LFS cloud servers.
+   - Setup:
+       1) Install Git LFS: `git lfs install`
+       2) Track the file pattern: `git lfs track "*.csv"` or `git lfs track "large_file.csv"`
+       3) Commit `.gitattributes`: `git add .gitattributes`
+       4) Commit and push normally.
+   - Limitation: GitHub gives 1 GB free bandwidth/storage per month; beyond that
+     requires a paid data pack.
+
+B) Columnar Compression (DuckDB / Parquet):
+   - A 173MB raw CSV consists of uncompressed text.
+   - When converted to Apache Parquet (`.parquet`) or DuckDB (`.duckdb`):
+       * 173MB CSV compresses down to ~12MB - 18MB!
+       * 100% lossless data retention.
+       * Fast analytical queries (50x faster than CSV).
+       * Well below GitHub's 100MB limit.
+   - Conversion command:
+       `duckdb -c "COPY (SELECT * FROM 'large.csv') TO 'compact.parquet' (FORMAT PARQUET);"`
+
+C) External Cloud Storage (AWS S3 / Google Cloud Storage / Hugging Face):
+   - Store giant datasets (1GB - 100GB+) on AWS S3 or Hugging Face Datasets.
+   - In Python, download or stream them using `boto3` or `urllib`:
+       `pd.read_parquet("https://your-bucket.s3.amazonaws.com/dataset.parquet")`
+
+--------------------------------------------------------------------------------
+5. SUMMARY & BEST PRACTICES
+--------------------------------------------------------------------------------
+1. Never commit raw, uncompressed CSV dumps into Git repositories.
+2. Store processed runtime data in DuckDB / SQLite / Parquet for smaller footprints
+   and maximum speed.
+3. Keep `.gitignore` updated with raw data paths.
+4. Use `git reset --soft HEAD~1` and `git rm -r --cached <path>` whenever a file
+   accidentally trips GitHub's size ceiling.
+================================================================================
