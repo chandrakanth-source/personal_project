@@ -1,0 +1,15 @@
+origin_hub,destination_market,distance_km,transit_hours,avg_freight_rate_rs_per_tonne
+Anantapur (AP),Hyderabad (Gaddiannaram),355,7,1650
+Anantapur (AP),Bangalore (Binny Mill),215,4,1100
+Anantapur (AP),Chennai (Koyambedu),470,9,2100
+Anantapur (AP),Mumbai (Vashi),870,16,3800
+Anantapur (AP),Delhi (Azadpur),1890,36,7500
+Anantapur (AP),Kolkata (Mechua),1580,30,6400
+Jalna / Aurangabad (MH),Mumbai (Vashi),380,8,1800
+Jalna / Aurangabad (MH),Delhi (Azadpur),1220,24,5200
+Jalna / Aurangabad (MH),Hyderabad (Gaddiannaram),510,10,2300
+Jalna / Aurangabad (MH),Bangalore (Binny Mill),880,17,3900
+Nagpur (MH),Kolkata (Mechua),1130,22,4800
+Nagpur (MH),Delhi (Azadpur),1080,20,4500
+Nagpur (MH),Sultanpur (UP),720,14,3100
+Nagpur (MH),Lucknow (UP),780,15,3300

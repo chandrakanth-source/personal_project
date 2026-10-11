@@ -1,0 +1,11 @@
+Market,Latest_Price,T+7d_Accuracy,T+7d_MAE,T+14d_Accuracy,T+14d_MAE,T+30d_Accuracy,T+30d_MAE
+Andhra_Pradesh_Anantapur_Anantapur,800.0,75.1,359.87,71.24,417.27,61.85,547.03
+Karnataka_Bangalore_Binny_Mill_F&V_Bangalore,3500.0,81.96,874.27,79.69,998.91,74.17,1257.91
+Maharashtra_Aurangabad_Aurangabad,3350.0,76.36,551.98,74.55,581.11,74.87,559.46
+Maharashtra_Nagpur_Nagpur,1475.0,86.59,218.73,82.83,286.35,77.8,360.91
+NCT_of_Delhi_Delhi_Azadpur,1950.0,86.18,425.56,83.61,503.16,81.31,573.41
+Rajasthan_Jodhpur_JodhpurF&VBhadwasia,2000.0,80.33,434.81,79.17,450.75,74.71,546.41
+Telangana_Hyderabad_Gaddiannaram,600.0,69.5,888.34,60.11,1173.83,59.5,1168.86
+Uttar_Pradesh_Lucknow_Lucknow,3450.0,92.14,278.21,88.83,407.93,85.31,539.83
+Uttar_Pradesh_Sultanpur_Sultanpur,3480.0,95.88,145.33,94.3,202.35,91.4,305.71
+West_Bengal_Kolkata_Mechua,4000.0,73.85,2064.24,71.41,2279.56,68.71,2498.78

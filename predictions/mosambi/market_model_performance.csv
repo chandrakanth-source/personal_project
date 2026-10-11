@@ -1,0 +1,11 @@
+Crop,Market,Latest_Price,T+7d_Accuracy,T+7d_MAE,T+14d_Accuracy,T+14d_MAE,T+30d_Accuracy,T+30d_MAE
+mosambi,Andhra_Pradesh_Anantapur_Anantapur,800.0,74.84,354.06,69.13,430.08,62.78,519.9
+mosambi,Karnataka_Bangalore_Binny_Mill_F&V_Bangalore,3500.0,81.77,884.07,80.1,990.22,74.38,1250.52
+mosambi,Maharashtra_Aurangabad_Aurangabad,3350.0,76.18,563.67,74.55,578.21,74.82,565.02
+mosambi,Maharashtra_Nagpur_Nagpur,1475.0,86.9,213.18,83.39,276.63,78.56,352.56
+mosambi,NCT_of_Delhi_Delhi_Azadpur,1950.0,85.92,435.94,83.5,505.74,81.45,572.0
+mosambi,Rajasthan_Jodhpur_JodhpurF&VBhadwasia,2000.0,80.65,428.64,79.1,452.57,74.69,549.01
+mosambi,Telangana_Hyderabad_Gaddiannaram,600.0,68.15,903.36,60.73,1133.03,60.31,1134.79
+mosambi,Uttar_Pradesh_Lucknow_Lucknow,3450.0,92.11,280.08,88.64,414.71,85.45,535.81
+mosambi,Uttar_Pradesh_Sultanpur_Sultanpur,3480.0,95.8,148.13,94.2,205.37,91.49,302.5
+mosambi,West_Bengal_Kolkata_Mechua,4000.0,74.31,2019.12,73.44,2094.55,68.73,2493.35

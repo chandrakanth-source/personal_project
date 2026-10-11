@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+env/
+venv/
+.kilo/
+.DS_Store
+Thumbs.db
+datasets/rice/raw_kaggle/
+*.csv.zip

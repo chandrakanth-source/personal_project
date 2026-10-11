@@ -1,0 +1,11 @@
+Region,Latitude,Longitude,Start_Date,End_Date,Total_Days,File_Name
+Anantapur_AndhraPradesh,14.6819,77.6006,2000-01-01,2024-02-01,8798,weather_Anantapur_AndhraPradesh.csv
+Bangalore_Karnataka,12.9716,77.5946,2000-01-01,2024-02-01,8798,weather_Bangalore_Karnataka.csv
+Nagpur_Maharashtra,21.1458,79.0882,2010-01-01,2024-02-01,5145,weather_Nagpur_Maharashtra.csv
+Aurangabad_Maharashtra,19.8762,75.3433,2010-01-01,2024-02-01,5145,weather_Aurangabad_Maharashtra.csv
+Hyderabad_Telangana,17.385,78.4867,2010-01-01,2024-02-01,5145,weather_Hyderabad_Telangana.csv
+Delhi_NCT,28.7041,77.1025,2010-01-01,2024-02-01,5145,weather_Delhi_NCT.csv
+Kolkata_WestBengal,22.5726,88.3639,2010-01-01,2024-02-01,5145,weather_Kolkata_WestBengal.csv
+Sultanpur_UttarPradesh,26.2648,82.0727,2010-01-01,2024-02-01,5145,weather_Sultanpur_UttarPradesh.csv
+Lucknow_UttarPradesh,26.8467,80.9462,2010-01-01,2024-02-01,5145,weather_Lucknow_UttarPradesh.csv
+Jodhpur_Rajasthan,26.2389,73.0243,2010-01-01,2024-02-01,5145,weather_Jodhpur_Rajasthan.csv

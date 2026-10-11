@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosambi Future Price Prediction Platform - AI Forecasting</title>
+    <meta name="description" content="AI-Powered Mosambi Future Price Prediction Platform using XGBoost, LightGBM, NASA Soil Moisture & Agronomic Factors across Major Indian Mandis.">
+    <!-- Google Fonts & Chart.js -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="brand">
+            <div class="brand-icon" id="crop-icon">🍊</div>
+            <div>
+                <h1 class="brand-title" id="app-title">Crop Price Oracle</h1>
+                <p class="brand-subtitle">AI Multi-Crop & Multi-Market Price Forecasting Engine</p>
+            </div>
+        </div>
+        <div class="nav-stats">
+            <div class="crop-select-wrapper">
+                <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Crop:</span>
+                <select id="crop-select" class="crop-select">
+                    <option value="mosambi">🍊 Mosambi</option>
+                </select>
+            </div>
+            <div class="nav-badge">Model Status: <strong>Trained & Active</strong></div>
+            <button class="save-btn" id="open-saved-modal-btn">💾 Save & Inspect Saved Markets</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Executive Metrics Cards -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">Monitored Mandis</div>
+                <div class="metric-value" id="total-markets-val">10</div>
+                <div class="metric-sub">Across 7 key Indian states</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-header">T+7d Forecast Accuracy</div>
+                <div class="metric-value text-up" id="avg-accuracy-val">--%</div>
+                <div class="metric-sub">Out-of-time test set evaluation</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-header">National Peak Mandi Price</div>
+                <div class="metric-value" id="top-market-val">--</div>
+                <div class="metric-sub" id="top-market-sub">--</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-header">Agronomic Data Source</div>
+                <div class="metric-value" style="font-size: 1.3rem; color: #3b82f6;">NASA POWER API</div>
+                <div class="metric-sub">Soil moisture & Surface temp</div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+
+            <!-- Sidebar Market Selection -->
+            <aside class="sidebar">
+                <div class="sidebar-title">
+                    <span>Select Market / Mandi</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">10 Markets</span>
+                </div>
+                <div class="market-list" id="market-list">
+                    <div style="padding: 1rem; color: var(--text-muted); font-size: 0.85rem;">Loading mandis...</div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+
+                <!-- Interactive Price Forecast Chart Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title" id="selected-market-title">Market Overview</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);" id="selected-as-of">Loading data...</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <button class="live-fetch-btn" id="main-live-fetch-btn" onclick="fetchLiveForMarket(currentMarketKey)">
+                                ⚡ Fetch & Save Today's Live Data
+                            </button>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Current Modal Price</div>
+                                <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary);" id="current-price-display">--</div>
+                            </div>
+                            <div class="horizon-toggle">
+                                <button class="horizon-btn active" data-horizon="7">7 Days</button>
+                                <button class="horizon-btn" data-horizon="14">14 Days</button>
+                                <button class="horizon-btn" data-horizon="30">30 Days</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Black Box Unreported Data Gap Alert -->
+                    <div id="black-box-banner"></div>
+
+                    <div class="chart-wrapper">
+                        <canvas id="priceChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Live Mandi Weather & Supply Chain Real-Time Intelligence Grid -->
+                <div class="live-intel-grid" id="live-intel-section">
+                    <!-- Live Weather & Microclimate Card -->
+                    <div class="intel-card" id="card-weather-live">
+                        <div class="intel-card-header">
+                            <div class="intel-card-title" style="color: #38bdf8;">
+                                <span>🌤️</span> Live Mandi Weather & Microclimate
+                            </div>
+                            <span class="intel-status-pill live" id="weather-live-badge">🔴 LIVE SYNCED</span>
+                        </div>
+                        <div class="stat-mini-grid">
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">Temperature</div>
+                                <div class="stat-mini-val" id="w-temp-val" style="color: #38bdf8;">-- °C</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="w-temp-range">Min: -- | Max: --</div>
+                            </div>
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">Relative Humidity</div>
+                                <div class="stat-mini-val" id="w-hum-val">--%</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="w-condition">--</div>
+                            </div>
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">Rain / Precipitation</div>
+                                <div class="stat-mini-val" id="w-rain-val">-- mm</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="w-wind-val">Wind: -- km/h</div>
+                            </div>
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">NASA Soil Moisture</div>
+                                <div class="stat-mini-val" id="w-soil-val" style="color: #c084fc;">--</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="w-soil-status">Optimal</div>
+                            </div>
+                        </div>
+                        <div class="intel-details-list">
+                            <div class="intel-details-row">
+                                <span style="color: var(--text-muted);">NASA Earth Surface Temp</span>
+                                <strong id="w-earth-temp">-- °C</strong>
+                            </div>
+                            <div class="intel-details-row">
+                                <span style="color: var(--text-muted);">Atmospheric Pressure</span>
+                                <strong id="w-pressure">-- hPa</strong>
+                            </div>
+                            <div class="intel-details-row">
+                                <span style="color: var(--text-muted);">Agronomic Harvest Condition</span>
+                                <strong id="w-harvest-cond" style="color: #10b981;">Harvest-Favorable Weather</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Supply Chain & Mandi Logistics Card -->
+                    <div class="intel-card" id="card-supply-live">
+                        <div class="intel-card-header">
+                            <div class="intel-card-title" style="color: #f59e0b;">
+                                <span>🚚</span> Live Supply Chain & Mandi Logistics
+                            </div>
+                            <span class="intel-status-pill live" id="supply-live-badge">🔴 ACTIVE INFLOW</span>
+                        </div>
+                        <div class="stat-mini-grid">
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">Daily Mandi Inflow</div>
+                                <div class="stat-mini-val" id="s-arr-val" style="color: #f59e0b;">-- Tonnes</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="s-arr-status">Normal Flow</div>
+                            </div>
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">Inflow Velocity (7d)</div>
+                                <div class="stat-mini-val" id="s-velocity-val">--%</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="s-rolling-val">Mean: -- T</div>
+                            </div>
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">Diesel Transport Fuel</div>
+                                <div class="stat-mini-val" id="s-diesel-val" style="color: #ef4444;">Rs. -- / L</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="s-freight-idx">Index: --x</div>
+                            </div>
+                            <div class="stat-mini-box">
+                                <div class="stat-mini-label">Procurement Demand</div>
+                                <div class="stat-mini-val" id="s-procure-val" style="color: #10b981;">--x</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);" id="s-trade-velocity">Active Trade</div>
+                            </div>
+                        </div>
+                        <div class="intel-details-list">
+                            <div class="intel-details-row">
+                                <span style="color: var(--text-muted);">7-Day Lagged Inflow</span>
+                                <strong id="s-lag-val">-- Tonnes</strong>
+                            </div>
+                            <div class="intel-details-row">
+                                <span style="color: var(--text-muted);">Export / Trade Parity Index</span>
+                                <strong id="s-export-idx">--x</strong>
+                            </div>
+                            <div class="intel-details-row">
+                                <span style="color: var(--text-muted);">Mandi Warehouse Occupancy</span>
+                                <strong id="s-occupancy" style="color: #38bdf8;">--% (Healthy Trade Buffer)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two Column Metrics & Simulation Grid -->
+                <div class="two-col-grid">
+
+                    <!-- Model Performance & Factors Card -->
+                    <div class="card">
+                        <h3 class="card-title" style="margin-bottom: 1rem; font-size: 1.05rem;">Model Metrics & Key Price Drivers</h3>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; background: var(--bg-dark); padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.85rem;">
+                            <div>
+                                <span style="color: var(--text-muted);">T+7d Error:</span>
+                                <strong id="metric-mae-7" style="color: var(--primary); margin-left: 0.3rem;">--</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-muted);">T+7d Acc:</span>
+                                <strong id="metric-acc-7" style="color: var(--primary); margin-left: 0.3rem;">--</strong>
+                            </div>
+                            <div>
+                                <span style="color: var(--text-muted);">R² Score:</span>
+                                <strong id="metric-r2-7" style="color: var(--secondary); margin-left: 0.3rem;">--</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem; font-size: 0.8rem; color: var(--text-muted); border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                            <span>T+14d Acc: <strong id="metric-acc-14" style="color:#fff;">--</strong> (MAE: <span id="metric-mae-14">--</span>)</span>
+                            <span>T+30d Acc: <strong id="metric-acc-30" style="color:#fff;">--</strong> (MAE: <span id="metric-mae-30">--</span>)</span>
+                        </div>
+
+                        <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">Top Features Driving Predictions</h4>
+                        <div class="factor-list" id="features-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Interactive Price Scenario Simulator Card -->
+                    <div class="card simulator-card">
+                        <h3 class="card-title" style="margin-bottom: 0.5rem; font-size: 1.05rem;">Interactive Scenario Simulator</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+                            Simulate shock impacts on future market prices by adjusting supply, weather, & demand parameters.
+                        </p>
+
+                        <div class="sim-control">
+                            <div class="sim-label">
+                                <span>Arrivals / Supply Volume Shift</span>
+                                <strong id="val-supply" style="color: var(--primary);">0%</strong>
+                            </div>
+                            <input type="range" class="sim-slider" id="sim-supply" min="-50" max="50" value="0">
+                        </div>
+
+                        <div class="sim-control">
+                            <div class="sim-label">
+                                <span>NASA Soil Moisture & Rainfall Impact</span>
+                                <strong id="val-moisture" style="color: var(--secondary);">0%</strong>
+                            </div>
+                            <input type="range" class="sim-slider" id="sim-moisture" min="-30" max="30" value="0">
+                        </div>
+
+                        <div class="sim-control">
+                            <div class="sim-label">
+                                <span>Wholesale Demand Multiplier</span>
+                                <strong id="val-demand" style="color: var(--accent);">1.0x</strong>
+                            </div>
+                            <input type="range" class="sim-slider" id="sim-demand" min="0.5" max="1.5" step="0.05" value="1.0">
+                        </div>
+
+                        <div class="sim-result-box">
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Simulated Future Price</div>
+                            <div class="sim-price" id="sim-result-price">--</div>
+                            <div id="sim-result-delta" style="font-weight: 700; font-size: 0.9rem; margin-top: 0.2rem;">--</div>
+                            <div class="sim-recommendation" id="sim-recommendation">--</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Saved Market Intelligence Modal Overlay -->
+    <div class="modal-backdrop" id="saved-modal" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div class="modal-icon">💾</div>
+                    <div>
+                        <h2 style="font-size: 1.25rem; font-weight: 700; color: #fff;">Saved Market Intelligence Dossier</h2>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Real Daily Factor Matrix: Price, Climate, Supply Chain, Real NASA Agronomic & Seasonality</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="live-fetch-btn" id="modal-fetch-all-live-btn" onclick="fetchLiveForAllMarkets()">
+                        ⚡ Fetch & Save Today's Live Data for ALL Mandis
+                    </button>
+                    <button class="modal-close-btn" id="close-saved-modal-btn">&times;</button>
+                </div>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Modal Sidebar: City / Town list -->
+                <div class="modal-sidebar">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Saved Mandi Cities & Towns</div>
+                    <div id="modal-city-list" class="modal-city-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Modal Main Detail Inspector -->
+                <div class="modal-main" id="modal-city-detail">
+                    <div style="text-align: center; color: var(--text-muted); padding: 3rem;">Select a city/town from the list to view its complete daily factor matrix.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Mosambi Future Price Prediction System • Powered by XGBoost, LightGBM & NASA Agronomic Datasets</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+Market_Dataset,Total_Records,Total_Features,Start_Date,End_Date,File_Name
+Andhra_Pradesh_Anantapur_Anantapur,717,45,2014-05-19,2019-10-30,master_Andhra_Pradesh_Anantapur_Anantapur.csv
+Karnataka_Bangalore_Binny_Mill_F&V_Bangalore,4741,45,2004-12-08,2024-02-01,master_Karnataka_Bangalore_Binny_Mill_F&V_Bangalore.csv
+Maharashtra_Aurangabad_Aurangabad,3013,45,2003-07-05,2016-03-09,master_Maharashtra_Aurangabad_Aurangabad.csv
+Maharashtra_Nagpur_Nagpur,3326,45,2002-10-29,2015-08-25,master_Maharashtra_Nagpur_Nagpur.csv
+NCT_of_Delhi_Delhi_Azadpur,5833,45,2005-04-11,2024-02-02,master_NCT_of_Delhi_Delhi_Azadpur.csv
+Rajasthan_Jodhpur_JodhpurF&VBhadwasia,4208,45,2001-12-11,2024-02-02,master_Rajasthan_Jodhpur_JodhpurF&VBhadwasia.csv
+Telangana_Hyderabad_Gaddiannaram,2820,45,2005-05-11,2023-12-31,master_Telangana_Hyderabad_Gaddiannaram.csv
+Uttar_Pradesh_Lucknow_Lucknow,4533,45,2003-01-23,2024-02-02,master_Uttar_Pradesh_Lucknow_Lucknow.csv
+Uttar_Pradesh_Sultanpur_Sultanpur,5277,45,2003-01-18,2024-02-02,master_Uttar_Pradesh_Sultanpur_Sultanpur.csv
+West_Bengal_Kolkata_Mechua,7470,45,2009-04-22,2024-02-02,master_West_Bengal_Kolkata_Mechua.csv

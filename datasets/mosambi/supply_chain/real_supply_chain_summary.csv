@@ -1,0 +1,11 @@
+State,District,Market,Total_Daily_Records,Total_Accumulated_Arrivals_Tonnes,Avg_Daily_Arrivals_Tonnes,Max_Single_Day_Arrival_Tonnes,File_Name
+Andhra Pradesh,Anantapur,Anantapur,717,140909.2,196.5,973.0,supply_Andhra_Pradesh_Anantapur_Anantapur.csv
+Karnataka,Bangalore,"Binny Mill (F&V), Bangalore",4741,872195.0,184.0,3222.0,supply_Karnataka_Bangalore_Binny_Mill_F&V_Bangalore.csv
+Maharashtra,Aurangabad,Aurangabad,3013,11515.0,3.8,360.0,supply_Maharashtra_Aurangabad_Aurangabad.csv
+Maharashtra,Nagpur,Nagpur,3326,771540.5,232.0,4480.0,supply_Maharashtra_Nagpur_Nagpur.csv
+NCT of Delhi,Delhi,Azadpur,5833,3337488.5,572.2,3341.5,supply_NCT_of_Delhi_Delhi_Azadpur.csv
+Rajasthan,Jodhpur,Jodhpur(F&V)(Bhadwasia),4208,165777.7,39.4,4038.0,supply_Rajasthan_Jodhpur_JodhpurF&VBhadwasia.csv
+Telangana,Hyderabad,Gaddiannaram,2820,783700.5,277.9,5268.0,supply_Telangana_Hyderabad_Gaddiannaram.csv
+Uttar Pradesh,Lucknow,Lucknow,4533,230560.6,50.9,1450.0,supply_Uttar_Pradesh_Lucknow_Lucknow.csv
+Uttar Pradesh,Sultanpur,Sultanpur,5277,70452.7,13.4,340.0,supply_Uttar_Pradesh_Sultanpur_Sultanpur.csv
+West Bengal,Kolkata,Mechua,7470,847119.7,113.4,49649.6,supply_West_Bengal_Kolkata_Mechua.csv

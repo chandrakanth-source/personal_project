@@ -1,0 +1,11 @@
+Region,Latitude,Longitude,Start_Date,End_Date,Total_Real_Records,File_Name
+Anantapur_AndhraPradesh,14.6819,77.6006,2010-01-01,2023-12-31,5113,real_agronomic_Anantapur_AndhraPradesh.csv
+Bangalore_Karnataka,12.9716,77.5946,2010-01-01,2023-12-31,5113,real_agronomic_Bangalore_Karnataka.csv
+Nagpur_Maharashtra,21.1458,79.0882,2010-01-01,2023-12-31,5113,real_agronomic_Nagpur_Maharashtra.csv
+Aurangabad_Maharashtra,19.8762,75.3433,2010-01-01,2023-12-31,5113,real_agronomic_Aurangabad_Maharashtra.csv
+Hyderabad_Telangana,17.385,78.4867,2010-01-01,2023-12-31,5113,real_agronomic_Hyderabad_Telangana.csv
+Delhi_NCT,28.7041,77.1025,2010-01-01,2023-12-31,5113,real_agronomic_Delhi_NCT.csv
+Kolkata_WestBengal,22.5726,88.3639,2010-01-01,2023-12-31,5113,real_agronomic_Kolkata_WestBengal.csv
+Sultanpur_UttarPradesh,26.2648,82.0727,2010-01-01,2023-12-31,5113,real_agronomic_Sultanpur_UttarPradesh.csv
+Lucknow_UttarPradesh,26.8467,80.9462,2010-01-01,2023-12-31,5113,real_agronomic_Lucknow_UttarPradesh.csv
+Jodhpur_Rajasthan,26.2389,73.0243,2010-01-01,2023-12-31,5113,real_agronomic_Jodhpur_Rajasthan.csv

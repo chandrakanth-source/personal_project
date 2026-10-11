@@ -1,0 +1,22 @@
+State,District,Market,Total_Records,Start_Date,End_Date,Avg_Modal_Price_Rs_Qt,File_Name
+West Bengal,Burdwan,Burdwan,6723,2002-11-25,2024-02-02,1322.24,West_Bengal_Burdwan_Burdwan.csv
+Gujarat,Dahod,Dahod,5620,2001-12-11,2024-02-02,1673.18,Gujarat_Dahod_Dahod.csv
+Uttar Pradesh,Basti,Basti,5618,2003-01-01,2024-02-02,1547.74,Uttar_Pradesh_Basti_Basti.csv
+Karnataka,Shimoga,Shimoga,4215,2002-04-06,2024-02-02,2256.95,Karnataka_Shimoga_Shimoga.csv
+Telangana,Karimnagar,Choppadandi,3935,2003-04-28,2024-02-02,1318.69,Telangana_Karimnagar_Choppadandi.csv
+NCT of Delhi,Delhi,Narela,3713,2001-06-19,2024-02-02,2012.85,NCT_of_Delhi_Delhi_Narela.csv
+Telangana,Nizamabad,Nizamabad,3473,2003-01-27,2024-01-27,1210.42,Telangana_Nizamabad_Nizamabad.csv
+Telangana,Nalgonda,Suryapeta,3291,2002-06-08,2024-02-02,1412.5,Telangana_Nalgonda_Suryapeta.csv
+Telangana,Mahbubnagar,Badepalli,3187,2002-05-07,2024-01-31,1204.75,Telangana_Mahbubnagar_Badepalli.csv
+Telangana,Karimnagar,Karimnagar,2751,2003-01-27,2024-01-18,1141.21,Telangana_Karimnagar_Karimnagar.csv
+Telangana,Nalgonda,Miryalaguda,2623,2002-06-11,2023-12-16,1231.54,Telangana_Nalgonda_Miryalaguda.csv
+Andhra Pradesh,Guntur,Repalli,2508,2009-09-15,2017-11-27,2896.78,Andhra_Pradesh_Guntur_Repalli.csv
+Andhra Pradesh,Krishna,Divi,2482,2008-10-04,2017-11-27,2442.63,Andhra_Pradesh_Krishna_Divi.csv
+Andhra Pradesh,Prakasam,Ongole,2481,2010-09-08,2017-11-16,3483.3,Andhra_Pradesh_Prakasam_Ongole.csv
+Andhra Pradesh,Prakasam,Chirala,2331,2009-12-17,2017-12-28,3404.81,Andhra_Pradesh_Prakasam_Chirala.csv
+Telangana,Medak,Siddipet,2286,2003-03-04,2024-02-01,1148.47,Telangana_Medak_Siddipet.csv
+Andhra Pradesh,Kurnool,Nandyal,2266,2007-12-26,2020-03-18,2864.98,Andhra_Pradesh_Kurnool_Nandyal.csv
+Andhra Pradesh,East Godavari,Rajahmundry,2181,2004-10-08,2024-02-02,1212.02,Andhra_Pradesh_East_Godavari_Rajahmundry.csv
+Andhra Pradesh,Guntur,Narasaraopet,1858,2008-05-17,2016-01-10,3189.56,Andhra_Pradesh_Guntur_Narasaraopet.csv
+Telangana,Warangal,Warangal,1708,2003-01-27,2020-12-16,1059.56,Telangana_Warangal_Warangal.csv
+Andhra Pradesh,West Godavari,Tadepalligudem,1429,2006-09-16,2014-12-14,3019.08,Andhra_Pradesh_West_Godavari_Tadepalligudem.csv

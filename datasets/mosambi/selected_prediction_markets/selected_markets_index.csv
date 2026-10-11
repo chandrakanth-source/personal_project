@@ -1,0 +1,11 @@
+State,District,Market,Total_Records,Start_Date,End_Date,Avg_Modal_Price_Rs_Qt,File_Name
+West Bengal,Kolkata,Mechua,7470,2009-04-22,2024-02-02,4057.94,West_Bengal_Kolkata_Mechua.csv
+NCT of Delhi,Delhi,Azadpur,5833,2005-04-11,2024-02-02,2009.93,NCT_of_Delhi_Delhi_Azadpur.csv
+Uttar Pradesh,Sultanpur,Sultanpur,5277,2003-01-18,2024-02-02,2397.51,Uttar_Pradesh_Sultanpur_Sultanpur.csv
+Karnataka,Bangalore,"Binny Mill (F&V), Bangalore",4741,2004-12-08,2024-02-01,2975.9,Karnataka_Bangalore_Binny_Mill_F&V_Bangalore.csv
+Uttar Pradesh,Lucknow,Lucknow,4533,2003-01-23,2024-02-02,2322.18,Uttar_Pradesh_Lucknow_Lucknow.csv
+Rajasthan,Jodhpur,Jodhpur(F&V)(Bhadwasia),4208,2001-12-11,2024-02-02,1547.0,Rajasthan_Jodhpur_JodhpurF&VBhadwasia.csv
+Maharashtra,Nagpur,Nagpur,3326,2002-10-29,2015-08-25,1995.65,Maharashtra_Nagpur_Nagpur.csv
+Maharashtra,Aurangabad,Aurangabad,3013,2003-07-05,2016-03-09,1187.38,Maharashtra_Aurangabad_Aurangabad.csv
+Telangana,Hyderabad,Gaddiannaram,2820,2005-05-11,2023-12-31,2428.2,Telangana_Hyderabad_Gaddiannaram.csv
+Andhra Pradesh,Anantapur,Anantapur,717,2014-05-19,2019-10-30,1526.92,Andhra_Pradesh_Anantapur_Anantapur.csv
