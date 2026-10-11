@@ -148,6 +148,10 @@ def background_continuous_data_updater():
         # Run every 24 hours (86,400 seconds)
         time.sleep(86400)
 
+# Top-level exports for serverless compatibility
+handler = MultiCropLiveDataServer
+app = MultiCropLiveDataServer
+
 def run_server():
     os.chdir(DIRECTORY)
     server_address = ("", PORT)
